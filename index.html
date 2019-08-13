@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>Jquery|ChatRoom</title>
+      <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="assets/css/styles.min.css">
+   </head>
+   <body>
+      <div class="jumbotron-contact jumbotron-contact-sm">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12 col-lg-12">
+                  <h1 class="h1">
+                     Jquery ChatRoom <small> v2.0</small>
+                  </h1>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="container">
+         <div class=" border border-primary rounded p-5" style='overflow-y: scroll; height: 400px;'>
+            <ul class="list-group" id="hold">
+            </ul>
+         </div>
+         <textarea class='form-control mt-3' style="resize: none"></textarea>
+         <input type="checkbox" id="check"><label>Send to enter</label>
+         <button class="btn btn-primary float-right mt-2" id="send">Send</button>
+      </div>
+      <script src="assets/js/jquery.min.js"></script>
+      <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+      <script type="text/javascript">
+         $(document).ready(()=>{
+             const ascii = 13
+         
+             $('textarea').on('keypress',(event)=>{
+                 if(event.which == ascii ){
+                     let msg = $('textarea').val()
+                     if($('#check').prop("checked")){
+                         if(msg < 1){
+                             alert('You have not entered any message')
+                         }else{
+                         $("#send").click()
+                         $("textarea").val("")
+                     }
+                     }
+                     
+                 }   
+             })  
+         
+             $("#send").click(()=>{
+                 time = new Date()
+                 let msg = $("textarea").val()
+                 if(msg < 1 ){
+                     alert('You have not entered any message')
+                 }else{
+                     $("textarea").val("");
+                         $("#hold").append(`
+                             <li class="list-group-item"><span class="msg"> Message >> ${msg}</span><small class="text-muted float-right">by Admin</small> <small class="text-danger">(${time.toUTCString()})</small></li>
+         
+                             `)
+                 }
+             })
+         })
+      </script>
+   </body>
+</html>
